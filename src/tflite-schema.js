@@ -178,7 +178,9 @@ tflite_schema.BuiltinOperator = {
   ROUND: 116,
   HARD_SWISH: 117,
   IF: 118,
-  WHILE: 119
+  WHILE: 119,
+  NON_MAX_SUPPRESSION_V4: 120,
+  NON_MAX_SUPPRESSION_V5: 121
 };
 
 /**
@@ -304,7 +306,9 @@ tflite_schema.BuiltinOperatorName = {
   116: 'ROUND',
   117: 'HARD_SWISH',
   118: 'IF',
-  119: 'WHILE'
+  119: 'WHILE',
+  120: 'NON_MAX_SUPPRESSION_V4',
+  121: 'NON_MAX_SUPPRESSION_V5'
 };
 
 /**
@@ -405,7 +409,9 @@ tflite_schema.BuiltinOptions = {
   HardSwishOptions: 91,
   IfOptions: 92,
   WhileOptions: 93,
-  DepthToSpaceOptions: 94
+  DepthToSpaceOptions: 94,
+  NonMaxSuppressionV4Options: 95,
+  NonMaxSuppressionV5Options: 96
 };
 
 /**
@@ -506,7 +512,9 @@ tflite_schema.BuiltinOptionsName = {
   91: 'HardSwishOptions',
   92: 'IfOptions',
   93: 'WhileOptions',
-  94: 'DepthToSpaceOptions'
+  94: 'DepthToSpaceOptions',
+  95: 'NonMaxSuppressionV4Options',
+  96: 'NonMaxSuppressionV5Options'
 };
 
 /**
@@ -9873,6 +9881,144 @@ tflite_schema.WhileOptions.createWhileOptions = function(builder, condSubgraphIn
   tflite_schema.WhileOptions.addCondSubgraphIndex(builder, condSubgraphIndex);
   tflite_schema.WhileOptions.addBodySubgraphIndex(builder, bodySubgraphIndex);
   return tflite_schema.WhileOptions.endWhileOptions(builder);
+}
+
+/**
+ * @constructor
+ */
+tflite_schema.NonMaxSuppressionV4Options = function() {
+  /**
+   * @type {flatbuffers.ByteBuffer}
+   */
+  this.bb = null;
+
+  /**
+   * @type {number}
+   */
+  this.bb_pos = 0;
+};
+
+/**
+ * @param {number} i
+ * @param {flatbuffers.ByteBuffer} bb
+ * @returns {tflite_schema.NonMaxSuppressionV4Options}
+ */
+tflite_schema.NonMaxSuppressionV4Options.prototype.__init = function(i, bb) {
+  this.bb_pos = i;
+  this.bb = bb;
+  return this;
+};
+
+/**
+ * @param {flatbuffers.ByteBuffer} bb
+ * @param {tflite_schema.NonMaxSuppressionV4Options=} obj
+ * @returns {tflite_schema.NonMaxSuppressionV4Options}
+ */
+tflite_schema.NonMaxSuppressionV4Options.getRootAsNonMaxSuppressionV4Options = function(bb, obj) {
+  return (obj || new tflite_schema.NonMaxSuppressionV4Options).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+};
+
+/**
+ * @param {flatbuffers.ByteBuffer} bb
+ * @param {tflite_schema.NonMaxSuppressionV4Options=} obj
+ * @returns {tflite_schema.NonMaxSuppressionV4Options}
+ */
+tflite_schema.NonMaxSuppressionV4Options.getSizePrefixedRootAsNonMaxSuppressionV4Options = function(bb, obj) {
+  return (obj || new tflite_schema.NonMaxSuppressionV4Options).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ */
+tflite_schema.NonMaxSuppressionV4Options.startNonMaxSuppressionV4Options = function(builder) {
+  builder.startObject(0);
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ * @returns {flatbuffers.Offset}
+ */
+tflite_schema.NonMaxSuppressionV4Options.endNonMaxSuppressionV4Options = function(builder) {
+  var offset = builder.endObject();
+  return offset;
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ * @returns {flatbuffers.Offset}
+ */
+tflite_schema.NonMaxSuppressionV4Options.createNonMaxSuppressionV4Options = function(builder) {
+  tflite_schema.NonMaxSuppressionV4Options.startNonMaxSuppressionV4Options(builder);
+  return tflite_schema.NonMaxSuppressionV4Options.endNonMaxSuppressionV4Options(builder);
+}
+
+/**
+ * @constructor
+ */
+tflite_schema.NonMaxSuppressionV5Options = function() {
+  /**
+   * @type {flatbuffers.ByteBuffer}
+   */
+  this.bb = null;
+
+  /**
+   * @type {number}
+   */
+  this.bb_pos = 0;
+};
+
+/**
+ * @param {number} i
+ * @param {flatbuffers.ByteBuffer} bb
+ * @returns {tflite_schema.NonMaxSuppressionV5Options}
+ */
+tflite_schema.NonMaxSuppressionV5Options.prototype.__init = function(i, bb) {
+  this.bb_pos = i;
+  this.bb = bb;
+  return this;
+};
+
+/**
+ * @param {flatbuffers.ByteBuffer} bb
+ * @param {tflite_schema.NonMaxSuppressionV5Options=} obj
+ * @returns {tflite_schema.NonMaxSuppressionV5Options}
+ */
+tflite_schema.NonMaxSuppressionV5Options.getRootAsNonMaxSuppressionV5Options = function(bb, obj) {
+  return (obj || new tflite_schema.NonMaxSuppressionV5Options).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+};
+
+/**
+ * @param {flatbuffers.ByteBuffer} bb
+ * @param {tflite_schema.NonMaxSuppressionV5Options=} obj
+ * @returns {tflite_schema.NonMaxSuppressionV5Options}
+ */
+tflite_schema.NonMaxSuppressionV5Options.getSizePrefixedRootAsNonMaxSuppressionV5Options = function(bb, obj) {
+  return (obj || new tflite_schema.NonMaxSuppressionV5Options).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ */
+tflite_schema.NonMaxSuppressionV5Options.startNonMaxSuppressionV5Options = function(builder) {
+  builder.startObject(0);
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ * @returns {flatbuffers.Offset}
+ */
+tflite_schema.NonMaxSuppressionV5Options.endNonMaxSuppressionV5Options = function(builder) {
+  var offset = builder.endObject();
+  return offset;
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ * @returns {flatbuffers.Offset}
+ */
+tflite_schema.NonMaxSuppressionV5Options.createNonMaxSuppressionV5Options = function(builder) {
+  tflite_schema.NonMaxSuppressionV5Options.startNonMaxSuppressionV5Options(builder);
+  return tflite_schema.NonMaxSuppressionV5Options.endNonMaxSuppressionV5Options(builder);
 }
 
 /**
